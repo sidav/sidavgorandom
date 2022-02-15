@@ -75,6 +75,16 @@ func (rnd *FibRandom) OneChanceFrom(numChances int) bool {
 	return rnd.Rand(numChances) == 0
 }
 
+func (rnd *FibRandom) PercentChance(perc int) bool {
+	if perc <= 0 {
+		return false
+	}
+	if perc >= 100 {
+		return true
+	}
+	return perc > rnd.Rand(100)
+}
+
 func (rnd *FibRandom) BiasedRandInRange(from, to, bias, influencePercent int) int {
 	// rnd = random() x (max - min) + min
 	// mix = random() x influence
